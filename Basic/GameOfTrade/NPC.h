@@ -3,7 +3,7 @@
 using namespace std;
 
 class AbstractNPC{
-    virtual void WelcomeClient();
+    virtual void WelcomeClient() = 0;
 };
 
 class NPC: AbstractNPC{
