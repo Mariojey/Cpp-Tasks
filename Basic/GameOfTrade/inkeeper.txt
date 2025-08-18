@@ -1,0 +1,4 @@
+Redańska 1 3
+Athelest 2 5
+Miecz 3 30
+Chleb 0 1

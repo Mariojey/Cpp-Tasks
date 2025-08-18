@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "NPC.h"
 
 using namespace std;
@@ -11,17 +12,28 @@ string NPC::getName(){
     return Name;
 }
 
-void NPC::setJob(string job){
-    Job = job;
+void NPC::setMoney(int money){
+    Money = money;
 }
 
-string NPC::getJob(){
-    return Job;
+int NPC::getMoney(){
+    return Money;
 }
 
-NPC::NPC(string name, string job)
-    : Name(name), Job(job) {}
+NPC::NPC(string name, int money)
+    : Name(name), Money(money) {}
 
 void NPC::WelcomeClient(){
-    cout<<"Witaj u "<<Job<<endl<<",czym mogę służyć!"<<endl;
+    cout<<"Witaj! "<<endl<<",czym mogę służyć!"<<endl;
+}
+
+Inkeeper::Inkeeper(string name, int money, vector<Item> items)
+    :NPC::NPC(name, money){
+        Items = items;
+    };
+
+void Inkeeper::ShowItems(){
+    for(auto& it : Items){
+        cout<<it.getName()<< " "<<it.getType()<< " "<<it.getPrice()<<endl;
+    }
 }

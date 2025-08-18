@@ -1,4 +1,8 @@
 #include  <iostream>
+#include <vector>
+#include <fstream>
+
+#include "Item.h"
 
 using namespace std;
 
@@ -12,17 +16,28 @@ private:
     string Name;
 
 protected:
-    string Job;
+    int Money;
 
 public:
 
     void setName(string name);
     string getName();
 
-    void setJob(string job);
-    string getJob();
+    void setMoney(int money);
+    int getMoney();
 
-    NPC(string name, string job);
+    NPC(string name, int money);
 
     void WelcomeClient();
+};
+
+class Inkeeper:public NPC{
+    
+    public:
+        vector<Item> Items;
+
+        Inkeeper(string name, int money, vector<Item> items);
+
+        void ShowItems();
+
 };
