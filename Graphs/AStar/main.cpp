@@ -61,6 +61,32 @@ void aStar(int grid[][SIZE_COL], Cell source, Cell goal){
         cout<< "Goal is blocked"<<endl;
         return;
     }
+
+
+    bool closedList[SIZE_ROW][SIZE_COL]; 
+
+    for (int i = 0; i < SIZE_ROW; i++)
+    {
+        for (int j = 0; j < SIZE_COL; j++)
+        {
+            closedList[SIZE_ROW][SIZE_COL] = false;
+        }
+        
+    }
+
+    Node cellsWithHeurystics[SIZE_ROW][SIZE_COL];
+
+    //Blank this array
+    for (int i = 0; i < SIZE_ROW; i++)
+    {
+        for (int j = 0; j < SIZE_COL; j++)
+        {
+            
+        }
+        
+    }
+    
+    
 }
 
 int main(){
