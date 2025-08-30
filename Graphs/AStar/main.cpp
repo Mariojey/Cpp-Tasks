@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <set>
+#include <stack>
 
 using namespace std;
 
@@ -26,6 +27,37 @@ double calculateValueOfH(int row, int col, Cell goal){
 
     return ((double)sqrt((x_utils * x_utils) + (y_utils * y_utils)));
 
+}
+
+void printPath(Node cellsWithHeurystics[][SIZE_COL], Cell goal){
+
+    int row = goal.first;
+    int col = goal.second;
+
+    stack<Cell> Path;
+
+    while (!(cellsWithHeurystics[row][col].x_of_parent == row
+            && cellsWithHeurystics[row][col].y_of_parent == col
+    ))
+    {
+        Path.push(make_pair(row, col));
+
+        int temp_row = cellsWithHeurystics[row][col].x_of_parent;
+        int temp_col = cellsWithHeurystics[row][col].y_of_parent;
+
+        row = temp_row;
+        col = temp_col;
+    }
+
+    Path.push(make_pair(row, col));
+
+    while(!Path.empty()){
+        pair<int, int> p = Path.top();
+        Path.pop();
+        cout<<"| "<<p.first<<","<<p.second<<" |"<<endl;
+    }
+
+    return;
 }
 
 void aStar(int grid[][SIZE_COL], Cell source, Cell goal){
