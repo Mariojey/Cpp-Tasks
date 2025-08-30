@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <set>
 
 using namespace std;
 
@@ -15,6 +16,8 @@ struct Node {
 
     double f, g, h;
 };
+
+typedef pair<double, pair<int, int>> CellWithHeurystics;
 
 double calculateValueOfH(int row, int col, Cell goal){
 
@@ -81,7 +84,60 @@ void aStar(int grid[][SIZE_COL], Cell source, Cell goal){
     {
         for (int j = 0; j < SIZE_COL; j++)
         {
-            
+            cellsWithHeurystics[i][j].x_of_parent = -1;
+            cellsWithHeurystics[i][j].y_of_parent = -1;
+            cellsWithHeurystics[i][j].g = __FLT_MAX__;
+            cellsWithHeurystics[i][j].f = __FLT_MAX__;
+            cellsWithHeurystics[i][j].h = __FLT_MAX__;
+        }
+    }
+
+    cellsWithHeurystics[source.first][source.second].x_of_parent = source.first;
+    cellsWithHeurystics[source.first][source.second].y_of_parent = source.second;
+
+    cellsWithHeurystics[source.first][source.second].f = 0.0;
+    cellsWithHeurystics[source.first][source.second].g = 0.0;
+    cellsWithHeurystics[source.first][source.second].h = 0.0;
+
+    set<CellWithHeurystics> openList;
+
+    openList.insert(make_pair(0.0, make_pair(source.first, source.second)));
+
+    bool gainedGoal = false;
+
+    while (!openList.empty())
+    {
+        
+        CellWithHeurystics point = *openList.begin();
+
+        openList.erase(openList.begin());
+
+        closedList[point.second.first][point.second.second] = true;
+
+        int x = point.second.first;
+        int y = point.second.second;
+
+        double gNew;
+        double hNew;
+        double fNew;
+
+        /*
+        0?0
+        0X0
+        000
+        */
+        if (x-1 >= 0 && x <SIZE_ROW && y >= 0 && y<SIZE_COL)
+        {
+            if((x-1)==goal.first && y == goal.second){
+                
+                cellsWithHeurystics[x-1][y].x_of_parent = x;
+                cellsWithHeurystics[x-1][y].y_of_parent = y;
+
+                cout<<"Lady's and Gentelmen, we got him!"<<endl;
+
+                gainedGoal = true;
+                return;
+            }
         }
         
     }
