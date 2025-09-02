@@ -166,14 +166,305 @@ void aStar(int grid[][SIZE_COL], Cell source, Cell goal){
                 cellsWithHeurystics[x-1][y].y_of_parent = y;
 
                 cout<<"Lady's and Gentelmen, we got him!"<<endl;
-
                 gainedGoal = true;
+
+                printPath(cellsWithHeurystics, goal);
                 return;
+            }else if(closedList[x - 1][y] == false && grid[x-1][y] == true){
+                gNew = cellsWithHeurystics[x][y].g + 1.0;
+                hNew = calculateValueOfH(x - 1, y, goal);
+                fNew = gNew + hNew;
+
+                if(cellsWithHeurystics[x-1][y].f == __FLT_MAX__ || cellsWithHeurystics[x - 1][y].f > fNew){
+                
+                    openList.insert(make_pair(fNew, make_pair(x - 1, y)));
+
+                    cellsWithHeurystics[x - 1][y].f = fNew;
+                    cellsWithHeurystics[x - 1][y].g = gNew;
+                    cellsWithHeurystics[x - 1][y].h = hNew;
+                    cellsWithHeurystics[x - 1][y].x_of_parent = x;
+                    cellsWithHeurystics[x - 1][y].y_of_parent = y;
+
+                }
             }
         }
-        
+
+        /*
+        000
+        0X0
+        0?0
+        */
+
+        if (x+1 >= 0 && x+1 <SIZE_ROW && y >= 0 && y<SIZE_COL)
+        {
+            if((x+1)==goal.first && y == goal.second){
+                
+                cellsWithHeurystics[x+1][y].x_of_parent = x;
+                cellsWithHeurystics[x+1][y].y_of_parent = y;
+
+                cout<<"Lady's and Gentelmen, we got him!"<<endl;
+
+                gainedGoal = true;
+
+                printPath(cellsWithHeurystics, goal);
+
+                return;
+            }else if(closedList[x + 1][y] == false && grid[x+1][y] == true){
+                gNew = cellsWithHeurystics[x][y].g + 1.0;
+                hNew = calculateValueOfH(x + 1, y, goal);
+                fNew = gNew + hNew;
+
+                if(cellsWithHeurystics[x+1][y].f == __FLT_MAX__ || cellsWithHeurystics[x + 1][y].f > fNew){
+                
+                    openList.insert(make_pair(fNew, make_pair(x + 1, y)));
+
+                    cellsWithHeurystics[x + 1][y].f = fNew;
+                    cellsWithHeurystics[x + 1][y].g = gNew;
+                    cellsWithHeurystics[x + 1][y].h = hNew;
+                    cellsWithHeurystics[x + 1][y].x_of_parent = x;
+                    cellsWithHeurystics[x + 1][y].y_of_parent = y;
+
+                }
+            }
+        }
+
+        /*
+        000
+        ?X0
+        000
+        */
+
+        if (x >= 0 && x <SIZE_ROW && y-1 >= 0 && y-1<SIZE_COL)
+        {
+            if(x==goal.first && y-1 == goal.second){
+                
+                cellsWithHeurystics[x][y-1].x_of_parent = x;
+                cellsWithHeurystics[x][y-1].y_of_parent = y;
+
+                cout<<"Lady's and Gentelmen, we got him!"<<endl;
+
+                gainedGoal = true;
+
+                printPath(cellsWithHeurystics, goal);
+
+                return;
+            }else if(closedList[x][y-1] == false && grid[x][y-1] == true){
+                gNew = cellsWithHeurystics[x][y-1].g + 1.0;
+                hNew = calculateValueOfH(x, y - 1, goal);
+                fNew = gNew + hNew;
+
+                if(cellsWithHeurystics[x][y - 1].f == __FLT_MAX__ || cellsWithHeurystics[x][y - 1].f > fNew){
+                
+                    openList.insert(make_pair(fNew, make_pair(x, y - 1)));
+
+                    cellsWithHeurystics[x][y - 1].f = fNew;
+                    cellsWithHeurystics[x][y - 1].g = gNew;
+                    cellsWithHeurystics[x][y - 1].h = hNew;
+                    cellsWithHeurystics[x][y - 1].x_of_parent = x;
+                    cellsWithHeurystics[x][y - 1].y_of_parent = y;
+
+                }
+            }
+        }
+
+
+        /*
+        000
+        0X?
+        000
+        */
+
+        if (x >= 0 && x <SIZE_ROW && y+1 >= 0 && y+1<SIZE_COL)
+        {
+            if((x)==goal.first && (y+1) == goal.second){
+                
+                cellsWithHeurystics[x][y+1].x_of_parent = x;
+                cellsWithHeurystics[x][y+1].y_of_parent = y;
+
+                cout<<"Lady's and Gentelmen, we got him!"<<endl;
+
+                gainedGoal = true;
+
+                printPath(cellsWithHeurystics, goal);
+
+                return;
+            }else if(closedList[x][y+1] == false && grid[x][y+1] == true){
+                gNew = cellsWithHeurystics[x][y+1].g + 1.0;
+                hNew = calculateValueOfH(x, y+1, goal);
+                fNew = gNew + hNew;
+
+                if(cellsWithHeurystics[x][y+1].f == __FLT_MAX__ || cellsWithHeurystics[x][y+1].f > fNew){
+                
+                    openList.insert(make_pair(fNew, make_pair(x, y+1)));
+
+                    cellsWithHeurystics[x][y+1].f = fNew;
+                    cellsWithHeurystics[x][y+1].g = gNew;
+                    cellsWithHeurystics[x][y+1].h = hNew;
+                    cellsWithHeurystics[x][y+1].x_of_parent = x;
+                    cellsWithHeurystics[x][y+1].y_of_parent = y;
+
+                }
+            }
+        }
+        /*
+        ?00
+        0X0
+        000
+        */
+
+        if (x-1 >= 0 && x-1 <SIZE_ROW && y-1 >= 0 && y-1<SIZE_COL)
+        {
+            if((x-1)==goal.first && (y-1) == goal.second){
+                
+                cellsWithHeurystics[x-1][y-1].x_of_parent = x;
+                cellsWithHeurystics[x-1][y-1].y_of_parent = y;
+
+                cout<<"Lady's and Gentelmen, we got him!"<<endl;
+
+                gainedGoal = true;
+
+                printPath(cellsWithHeurystics, goal);
+
+                return;
+            }else if(closedList[x-1][y-1] == false && grid[x-1][y-1] == true){
+                gNew = cellsWithHeurystics[x-1][y-1].g + 1.0;
+                hNew = calculateValueOfH(x-1, y-1, goal);
+                fNew = gNew + hNew;
+
+                if(cellsWithHeurystics[x-1][y-1].f == __FLT_MAX__ || cellsWithHeurystics[x-1][y-1].f > fNew){
+                
+                    openList.insert(make_pair(fNew, make_pair(x-1, y-1)));
+
+                    cellsWithHeurystics[x-1][y-1].f = fNew;
+                    cellsWithHeurystics[x-1][y-1].g = gNew;
+                    cellsWithHeurystics[x-1][y-1].h = hNew;
+                    cellsWithHeurystics[x-1][y-1].x_of_parent = x;
+                    cellsWithHeurystics[x-1][y-1].y_of_parent = y;
+
+                }
+            }
+        }
+        /*
+        00?
+        0X0
+        000
+        */
+
+        if (x-1 >= 0 && x-1 <SIZE_ROW && y+1 >= 0 && y+1<SIZE_COL)
+        {
+            if((x-1)==goal.first && (y+1) == goal.second){
+                
+                cellsWithHeurystics[x-1][y+1].x_of_parent = x;
+                cellsWithHeurystics[x-1][y+1].y_of_parent = y;
+
+                cout<<"Lady's and Gentelmen, we got him!"<<endl;
+
+                gainedGoal = true;
+
+                printPath(cellsWithHeurystics, goal);
+
+                return;
+            }else if(closedList[x-1][y+1] == false && grid[x-1][y+1] == true){
+                gNew = cellsWithHeurystics[x-1][y+1].g + 1.0;
+                hNew = calculateValueOfH(x-1, y+1, goal);
+                fNew = gNew + hNew;
+
+                if(cellsWithHeurystics[x-1][y+1].f == __FLT_MAX__ || cellsWithHeurystics[x-1][y+1].f > fNew){
+                
+                    openList.insert(make_pair(fNew, make_pair(x-1, y+1)));
+
+                    cellsWithHeurystics[x-1][y+1].f = fNew;
+                    cellsWithHeurystics[x-1][y+1].g = gNew;
+                    cellsWithHeurystics[x-1][y+1].h = hNew;
+                    cellsWithHeurystics[x-1][y+1].x_of_parent = x;
+                    cellsWithHeurystics[x-1][y+1].y_of_parent = y;
+
+                }
+            }
+        }
+        /*
+        000
+        0X0
+        ?00
+        */
+
+        if (x+1 >= 0 && x+1 <SIZE_ROW && y-1 >= 0 && y-1<SIZE_COL)
+        {
+            if((x+1)==goal.first && (y-1) == goal.second){
+                
+                cellsWithHeurystics[x+1][y-1].x_of_parent = x;
+                cellsWithHeurystics[x+1][y-1].y_of_parent = y;
+
+                cout<<"Lady's and Gentelmen, we got him!"<<endl;
+
+                gainedGoal = true;
+
+                printPath(cellsWithHeurystics, goal);
+
+                return;
+            }else if(closedList[x+1][y-1] == false && grid[x+1][y-1] == true){
+                gNew = cellsWithHeurystics[x+1][y-1].g + 1.0;
+                hNew = calculateValueOfH(x+1, y-1, goal);
+                fNew = gNew + hNew;
+
+                if(cellsWithHeurystics[x+1][y-1].f == __FLT_MAX__ || cellsWithHeurystics[x+1][y-1].f > fNew){
+                
+                    openList.insert(make_pair(fNew, make_pair(x+1, y-1)));
+
+                    cellsWithHeurystics[x+1][y-1].f = fNew;
+                    cellsWithHeurystics[x+1][y-1].g = gNew;
+                    cellsWithHeurystics[x+1][y-1].h = hNew;
+                    cellsWithHeurystics[x+1][y-1].x_of_parent = x;
+                    cellsWithHeurystics[x+1][y-1].y_of_parent = y;
+
+                }
+            }
+        }
+        /*
+        000
+        0X0
+        00?
+        */
+
+        if (x-1 >= 0 && x-1 <SIZE_ROW && y+1 >= 0 && y+1<SIZE_COL)
+        {
+            if((x-1)==goal.first && (y+1) == goal.second){
+                
+                cellsWithHeurystics[x-1][y+1].x_of_parent = x;
+                cellsWithHeurystics[x-1][y+1].y_of_parent = y;
+
+                cout<<"Lady's and Gentelmen, we got him!"<<endl;
+
+                gainedGoal = true;
+
+                printPath(cellsWithHeurystics, goal);
+
+                return;
+            }else if(closedList[x-1][y+1] == false && grid[x-1][y+1] == true){
+                gNew = cellsWithHeurystics[x-1][y+1].g + 1.0;
+                hNew = calculateValueOfH(x-1, y+1, goal);
+                fNew = gNew + hNew;
+
+                if(cellsWithHeurystics[x-1][y+1].f == __FLT_MAX__ || cellsWithHeurystics[x-1][y+1].f > fNew){
+                
+                    openList.insert(make_pair(fNew, make_pair(x-1, y+1)));
+
+                    cellsWithHeurystics[x-1][y+1].f = fNew;
+                    cellsWithHeurystics[x-1][y+1].g = gNew;
+                    cellsWithHeurystics[x-1][y+1].h = hNew;
+                    cellsWithHeurystics[x-1][y+1].x_of_parent = x;
+                    cellsWithHeurystics[x-1][y+1].y_of_parent = y;
+
+                }
+            }
+        }
     }
-    
+
+    if(gainedGoal == false){
+        cout<<"There is no goal!"<<endl;
+    }
+
+    return;
     
 }
 
