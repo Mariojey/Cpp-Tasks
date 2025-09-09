@@ -2,12 +2,19 @@
 
 using namespace std;
 
+#ifndef ITEM_TYPE_H
+#define ITEM_TYPE_H
+
 enum EItemType {
     FOOD,
     DRINK,
     MEDICINE,
     ARMOR
 };
+#endif
+
+#ifndef ITEM_H
+#define ITEM_H
 
 class Item{
 
@@ -31,3 +38,5 @@ class Item{
         Item(string name, EItemType type, int price);
         
 };
+
+#endif
