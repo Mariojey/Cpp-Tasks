@@ -23,3 +23,12 @@ int Player::getMoney(){
 Player::Player(string name, int money, vector<Item> items)
     : Name(name), Money(money), Equipment(items) {}
 
+void Player::Welcome(){
+    cout<<"Na zachodzie bez zmian"<<endl;
+}
+
+void Player::ShowItems(){
+    for(auto& item : Equipment){
+        cout<<item.getName()<<" "<<item.getType()<<" "<<item.getPrice()<<endl;
+    }
+}
