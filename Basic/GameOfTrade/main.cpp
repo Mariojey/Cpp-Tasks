@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "NPC.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -60,8 +61,34 @@ int main(){
     vector<Item> loadedInkeeperItems = loadItemsFromFile("inkeeper.txt");
 
     Inkeeper John = Inkeeper("John", 20, loadedInkeeperItems);
-    John.ShowItems();
-    cout<<playerMoney<<endl;
+
+    string playerName;
+
+    cout<<"Podaj imię postaci: "<<endl;
+    cin>>playerName;
+
+    Player Ian = Player(playerName, playerMoney, playerEquipment);
+
+    string command;
+
+    while (command != "q")
+    {
+        cout<<"i - wyświetl ekwipunek"<<endl;
+        cout<<"s - wejdź do sklepu"<<endl;
+        cin>>command;
+
+        if (command == "i")
+        {
+            Ian.ShowItems();
+        }else if(command == "s"){
+            John.WelcomeClient();
+            John.ShowItems();
+        }
+        
+    }
+    
+    
+
 
     return 0;
 }
