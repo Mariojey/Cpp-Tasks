@@ -91,7 +91,7 @@ vector<vector<Gen>> rankingSelection(vector<vector<Gen>> generatedPopulation, ve
     vector<vector<Gen>> Parents;
 
     unsigned int maximumPrice = 0;
-    for (int i = POPULATION_SIZE; i > 0; i++)
+    for (int i = POPULATION_SIZE; i > 0; i--)
     {
         maximumPrice += i;
     }
@@ -112,12 +112,16 @@ vector<vector<Gen>> rankingSelection(vector<vector<Gen>> generatedPopulation, ve
     unsigned int prevPosition = 0;
     unsigned int iterator = POPULATION_SIZE;
 
+    cout<<"Random Value: "<<randomValue<<endl;
+
     for (auto& genotype: sortedGenotypes)
     {
         prevPosition = currentPosInRoulette;
         currentPosInRoulette += iterator;
 
         iterator--;
+
+        cout<<"Aktualna pozycja: "<<currentPosInRoulette<<endl;
 
         if(currentPosInRoulette > randomValue){
             Parents.push_back(genotype);
@@ -156,21 +160,7 @@ int main(){
     vector<vector<Gen>> generatedPopulation = generatePopulation(POPULATION_SIZE, GENOTYPE_LEN);
     vector<GenCandidat> gensEnvironment = loadGensFromFile("stats.txt");
 
-    for (auto& chromosom : generatedPopulation)
-    {
-        for(auto& fenotype : chromosom){
-            cout<<fenotype.getAllel();
-        }
-        cout<<endl;
-    }
-
-    for (auto& chromosom : generatedPopulation)
-    {
-        unsigned int calcualtedPrice = chromosomValidation(chromosom, GENOTYPE_LEN, gensEnvironment, MAX_WEIGHT);
-        cout<<calcualtedPrice<<endl;
-    }
-
-    cout<<"xD"<<endl;
+    cout<<"Parents debugging"<<endl;
     
     vector<vector<Gen>> selectedParents = rankingSelection(generatedPopulation, gensEnvironment);
     
