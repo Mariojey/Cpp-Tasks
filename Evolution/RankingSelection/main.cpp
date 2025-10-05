@@ -112,16 +112,12 @@ vector<vector<Gen>> rankingSelection(vector<vector<Gen>> generatedPopulation, ve
     unsigned int prevPosition = 0;
     unsigned int iterator = POPULATION_SIZE;
 
-    cout<<"Random Value: "<<randomValue<<endl;
-
     for (auto& genotype: sortedGenotypes)
     {
         prevPosition = currentPosInRoulette;
         currentPosInRoulette += iterator;
 
         iterator--;
-
-        cout<<"Aktualna pozycja: "<<currentPosInRoulette<<endl;
 
         if(currentPosInRoulette > randomValue){
             Parents.push_back(genotype);
