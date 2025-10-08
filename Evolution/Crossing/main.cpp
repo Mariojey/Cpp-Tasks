@@ -234,7 +234,16 @@ int main(){
         cout<<endl;
     }
 
-    //DO przetestowania generowanie funkcją pointCrossing
+    vector<vector<Gen>> generatedChildren = pointCrossing(selectedParents,gensEnvironment);
+
+    for (auto& fenotype: generatedChildren){
+        unsigned int calculatedPrice = chromosomValidation(fenotype, GENOTYPE_LEN, gensEnvironment, MAX_WEIGHT);
+        cout<<calculatedPrice<<" - ";
+        for(auto& allel : fenotype){
+            cout<<allel.getAllel();
+        }
+        cout<<endl;
+    }
     
 
     return 0;
